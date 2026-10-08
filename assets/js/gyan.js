@@ -28,6 +28,9 @@
     function render() {
         slides.forEach(function (slide, i) {
             slide.classList.toggle('is-active', i === index);
+            // only the active slide's video loads fully; the others stay unloaded (poster only)
+            var video = slide.querySelector('video');
+            if (video) { video.preload = (i === index) ? 'auto' : 'none'; }
         });
         pillButtons.forEach(function (btn) {
             btn.classList.toggle('is-active', Number(btn.dataset.gyanIndex) === index);
