@@ -44,6 +44,10 @@
         if (leaving) {
             leaving.pause();
             leaving.currentTime = 0;
+            // once loaded, the browser swaps the poster for a video frame and never restores
+            // it; preload 'none' + load() resets the element so the thumbnail shows again
+            leaving.preload = 'none';
+            leaving.load();
         }
         setPlaying(false);
         index = newIndex;
